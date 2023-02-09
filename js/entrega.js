@@ -1,34 +1,75 @@
-let total = 0;
-let variableSocio = 200;
-let variableCuota = 500;
-let variablePrestamo = 150;
-let ciclo = 0
+class Producto {
+	constructor(id, titulo, precio, cantidad, genero) {
+		this.id = id;
+		this.titulo = titulo;
+		this.precio = Number(precio);
+		this.cantidad = Number(cantidad);
+		this.genero = genero;
+		this.vendido = false;
+		this.subtotal = 0;
+	}
 
-let variableCantidadOperaciones = parseInt(prompt('cuantas operaciones desea realizar'))
-while (variableCantidadOperaciones > ciclo){
-
-let opcion = parseInt(prompt("Bienvenido, por favor indique el número de la opcion deseada. \n\n\n 1 - Volverse socio de la Biblioteca ($200) \n 2 - Pagar la Cuota socio ($500) \n 3 -Prestamo de libro mayor a 15 dias ($150) \n 4 -Finalizar consulta" ));
-
-function biblioteca() {
-    
-if (opcion === 1) {
-    return alert('Su total es: $' + variableSocio);
-
-} else if (opcion === 2){
-    return alert('Su total es: $' + variableCuota);
-
-}else if(opcion === 3) {
-    return alert('Su total es: $' + variablePrestamo);
-
-}else if (opcion === 4) {
-    return alert("Consulta finalizada");
-
-
-}}
-
-biblioteca ()
-ciclo++
+	sumaIva() {
+		this.precio = this.precio * 1.21;
+	}
 }
 
-alert ('operaciones realizadas correctamente')
+const productos = [];
 
+productos.push(new Producto(1, 'El Principito', '2000', '10', 'Narrativa'));
+productos.push(new Producto(2, 'Mi planta de naranja lima', '2100', '5', 'Novela'));
+productos.push(new Producto(3, 'Don quijote de la mancha', '6000', '6', 'Novela'));
+
+
+subtotal();
+for (const producto of productos) {
+	console.log(`ID: ${producto.id}\nNombre: ${producto.titulo}\nPrecio: ${producto.precio}\nCantidad: ${producto.cantidad}\nDescripción: ${producto.genero}\n\n`);}
+
+
+function subtotal() {
+	for (const producto of productos) {
+		producto.sumaIva();
+		producto.subtotal = producto.precio * producto.cantidad;
+		producto.vendido = true;
+	}
+}
+
+
+
+function retirar () {
+
+let montoARetirar = parseFloat(prompt("Ingrese el monto a retirar"));
+	while(montoARetirar <= cantidad) {
+        montoARetirar = parseFloat(prompt("Ingrese el monto a retirar"));
+
+		cliente1.ejecutarOperacion("Retirar", montoARetirar);
+    }
+}
+
+
+let operacion = prompt("Ingrese el libro que desee: \n1)- El Principito, \n2)- Mi planta de naranja lima, \n3)- Don quijote de la mancha. \nEscriba Salir si quiere salir del programa");
+
+while(operacion !== "Salir") {
+
+    switch(operacion) {
+
+        case "1":
+            retirar();
+            break;
+
+        case "2":
+            retirar();
+            break;
+
+        case "3":
+            retirar();
+            break;
+
+        default:
+            alert("Opción desconocida");
+            break;
+    }
+
+
+    operacion = prompt("Ingrese el libro que desee: (1- El Principito, 2- Mi planta de naranja lima, 3- Don quijote de la mancha. Escriba Salir si quiere salir del programa");
+}
